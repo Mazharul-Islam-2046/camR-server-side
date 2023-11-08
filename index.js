@@ -152,6 +152,32 @@ async function run() {
 
 
 
+
+      // my Products get method
+      app.get("/products/:uid", async (req, res) => {
+        const value = req.params.uid
+        const query = {
+          provider_id: value
+        }
+        const result = await productsCollection.find(query).toArray();
+        console.log(result);
+        res.send(result);
+      });
+
+
+      // products get by id
+      app.get("/products/:id", async (req, res) => {
+        const value = req.params.id
+        const query = {
+          _id: new ObjectId(value)
+        }
+        const result = await productsCollection.findOne(query);
+        console.log(result);
+        res.send(result);
+      });
+
+
+
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection

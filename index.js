@@ -99,8 +99,16 @@ async function run() {
 
 
 
-      
-
+      // Get Popular Products methods
+      app.get("/products/popular", async (req, res) => {
+        const value = true
+        const query = {
+          isPopular: value
+        }
+        const result = await productsCollection.find(query).toArray();
+        console.log(result);
+        res.send(result);
+      });
 
 
 

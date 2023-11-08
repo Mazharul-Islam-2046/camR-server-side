@@ -111,6 +111,37 @@ async function run() {
       });
 
 
+      
+
+
+
+      // Get Product By Categories
+      app.get("/products/:category", async (req, res) => {
+        const value = req.params.category
+        const query = {
+          category: value
+        }
+        const result = await productsCollection.find(query).toArray();
+        console.log(result);
+        res.send(result);
+      });
+
+
+      // Get Popular Products by category
+
+      app.get("/products/:category/popular", async (req, res) => {
+        const category = req.params.category
+        const value = true
+        const query = {
+          category: category,
+          isPopular: value
+        }
+        const result = await productsCollection.find(query).toArray();
+        console.log(result);
+        res.send(result);
+      });
+
+
 
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();

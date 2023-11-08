@@ -90,6 +90,33 @@ async function run() {
 
 
 
+
+      // Update product
+      app.put("/products", async (req, res) => {
+        const data = req.body;
+        const id = data._id
+        const filter = { _id: new ObjectId(id) };
+        const options = { upsert: true };
+        const updatedUsers = {
+          $set: {
+            email: email,
+            name: data.name,
+            photo: data.photo,
+            uid: data.uid
+          },
+        };
+        const result = await usersCollection.updateOne(
+          filter,
+          updatedUsers,
+          options
+        );
+        res.send(result);
+      });  
+
+
+
+
+
       // Get Products method
       app.get("/products", async (req, res) => {
         const result = await productsCollection.find().toArray();

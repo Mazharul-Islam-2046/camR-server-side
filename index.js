@@ -29,6 +29,7 @@ async function run() {
 
     const usersCollection = client.db("camR").collection("users");
     const categoriesCollection = client.db("camR").collection("Categories");
+    const productsCollection = client.db("camR").collection("products");
 
 
 
@@ -86,6 +87,19 @@ async function run() {
         );
         res.send(result);
       });  
+
+
+
+
+      // Get Products method
+      app.get("/products", async (req, res) => {
+        const result = await productsCollection.find().toArray();
+        res.send(result);
+      });
+
+
+
+      
 
 
 

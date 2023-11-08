@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 
 
@@ -46,7 +46,6 @@ async function run() {
       // User Get Method
       app.get("/users/:uid", async (req, res) => {
         const uid = req.params.uid
-        console.log(typeof(uid));
         const query = {
           uid: uid
         }
@@ -154,7 +153,7 @@ async function run() {
 
 
       // my Products get method
-      app.get("/products/:uid", async (req, res) => {
+      app.get("/products/uid/:uid", async (req, res) => {
         const value = req.params.uid
         const query = {
           provider_id: value
@@ -166,10 +165,10 @@ async function run() {
 
 
       // products get by id
-      app.get("/products/:id", async (req, res) => {
-        const value = req.params.id
+      app.get("/products/ids/:id", async (req, res) => {
+        const id = req.params.id
         const query = {
-          _id: new ObjectId(value)
+          _id: new ObjectId(id)
         }
         const result = await productsCollection.findOne(query);
         console.log(result);

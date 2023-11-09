@@ -56,6 +56,27 @@ async function run() {
 
 
 
+      // User bookings Update method with UID
+
+      app.put("/users/bookings", async (req, res) => {
+        const data = req.body;
+        const email = data.email
+        const filter = { email: email };
+        const options = { upsert: true };
+        const updatedUsers = {
+          $set: {
+            bookedProducts: data.bookedIDs
+          },
+        };
+        const result = await usersCollection.updateOne(
+          filter,
+          updatedUsers,
+          options
+        );
+        res.send(result);
+      });  
+
+
 
     // User Post Method
     app.post("/users", async (req, res) => {
@@ -76,7 +97,8 @@ async function run() {
             email: email,
             name: data.name,
             photo: data.photo,
-            uid: data.uid
+            uid: data.uid,
+            bookedProducts: []
           },
         };
         const result = await usersCollection.updateOne(

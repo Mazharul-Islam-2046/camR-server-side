@@ -98,7 +98,6 @@ async function run() {
             name: data.name,
             photo: data.photo,
             uid: data.uid,
-            bookedProducts: []
           },
         };
         const result = await usersCollection.updateOne(

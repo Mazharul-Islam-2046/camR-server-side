@@ -169,7 +169,7 @@ async function run() {
 
 
       // get products by provider name
-      app.get("/products/:name", async (req, res) => {
+      app.get("/products/name/:name", async (req, res) => {
         const value = req.params.name
         const query = {
           provider_name: value

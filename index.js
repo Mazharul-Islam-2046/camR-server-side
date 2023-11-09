@@ -117,16 +117,24 @@ async function run() {
         const data = req.body;
         const id = data._id
         const filter = { _id: new ObjectId(id) };
-        const options = { upsert: true };
+        const options = { upsert: ture };
         const updatedUsers = {
           $set: {
-            email: email,
-            name: data.name,
-            photo: data.photo,
-            uid: data.uid
+            category: data.category,
+            product_name: data.product_name,
+            product_image: data.product_image,
+            description: data.description,
+            provider_name:data.provider_name,
+            provider_image: data.provider_image,
+            provider_id: data.provider_id,
+            provider_email: data.provider_email,
+            price_per_day: data.price_per_day,
+            location: data.location,
+            isPopular:false
+
           },
         };
-        const result = await usersCollection.updateOne(
+        const result = await productsCollection.updateOne(
           filter,
           updatedUsers,
           options
